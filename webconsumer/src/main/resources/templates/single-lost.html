@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>已拾到失物</title>
+
+    <!-- Custom fonts for this template 图标-->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template 样式-->
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+
+    <script src="/js/singleLost.js"></script>
+
+</head>
+
+<body id="page-top">
+
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div th:replace="module::sideBar"></div>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                 <!-- Topbar -->
+                <div th:replace="module::topBar"></div>
+                 <section class="breadcrumbs-custom">
+                    <div class="parallax-container breadcrumbs_section">
+                      <div class="breadcrumbs-custom-body parallax-content context-dark">
+                        <div class="container">
+                          <h1 class="breadcrumbs-custom-title">Single Lost</h1>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="breadcrumbs-custom-footer">
+                      <div class="container">
+                        <ul class="breadcrumbs-custom-path">
+                          <li><a href="index.html">Home</a></li>
+                          <li><a href="cards.html">LostAndFound</a></li>
+                          <li class="active">SingleLost</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </section>
+                  <!-- Single Product-->
+                  <section class="section section-md section-first bg-default">
+                    <div class="container">
+                      <div class="row row-30">
+                        <div class="col-lg-6">
+                          <div class="slick-vertical slick-product">
+                            <!-- Slick Carousel-->
+                            <div class="slick-slider carousel-parent" id="carousel-parent" data-items="1" data-swipe="true" data-child="#child-carousel" data-for="#child-carousel">
+                              <div class="item">
+                                <div class="slick-product-figure"><img src="/img/single-product-2.png" alt="" width="530" height="480"/>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="single-product">
+                            <h3 class="text-transform-none font-weight-medium" th:text="${lf.getName()}"></h3>
+                            <div class="group-md group-middle">
+                              
+                              <div class="single-product-rating"><span class="icon mdi mdi-star"></span><span class="icon mdi mdi-star"></span><span class="icon mdi mdi-star"></span><span class="icon mdi mdi-star"></span><span class="icon mdi mdi-star-half"></span></div>
+                            </div>
+                            <p id="information">Lorem ipsum dolor sit amet, ei impetus epicurei his, ne falli erant consequuntur est. Mei simul aperiam eu, an rebum regione ponderum mel. Facer placerat ut duo, id duis solum maiorum vis, vim autemsemper docendi cu. Pro</p>
+                            <hr class="hr-gray-100">
+                            <ul class="list list-description">
+                              <li><span>拾取人：</span><span id="user_id" th:text="${lf.getUserId()}"></span></li>
+                              <li><span>拾取地点：</span><span id="location" th:text="${lf.getLocation()}"></span></li>
+                              <li><span>拾取时间：</span><span id="time" th:text="${lf.getTime()}"></span></li>
+                              
+                            </ul>
+                            <div class="group-xs group-middle">
+                              <!-- <div class="product-stepper">
+                                <input class="form-input" type="number" data-zeros="true" value="1" min="1" max="1000">
+                              </div> -->
+                              <div><a class="button button-lg button-secondary button-zakaria" href="#goto">Add Application</a></div>
+                              
+                            </div>
+                            <hr class="hr-gray-100">
+                            
+                             
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Bootstrap tabs-->
+                      <div class="tabs-custom tabs-horizontal tabs-line" id="tabs-1">
+                        <!-- Nav tabs-->
+                        <div class="nav-tabs-wrap">
+                          <ul class="nav nav-tabs nav-tabs-1">
+                            <li class="nav-item" role="presentation"><a class="nav-link active" href="#tabs-1-1" data-toggle="tab">Application</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-2" data-toggle="tab">Reviews</a></li>
+                            <!-- <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-3" data-toggle="tab">Delivery and payment</a></li> -->
+                          </ul>
+                        </div>
+                        <!-- Tab panes-->
+                        <div class="tab-content tab-content-1">
+                          <div class="tab-pane fade show active" id="tabs-1-1">
+                            <div class="box-comment">
+                              <div class="unit flex-column flex-sm-row unit-spacing-md">
+                                <div class="unit-left"><a class="box-comment-figure" href="#"><img src="/img/头像.jpg" alt="" width="119" height="119"/></a></div>
+                                <div class="unit-body">
+                                  <div class="group-sm group-justify">
+                                    <div>
+                                      <div class="group-xs group-middle">
+                                        <h5 class="box-comment-author"><a href="#" id="LostUser">拾取人：</a></h5>
+                                        <div class="box-rating">
+                                          <span class="icon mdi mdi-star"></span>
+                                          <span class="icon mdi mdi-star"></span>
+                                          <span class="icon mdi mdi-star"></span>
+                                          <span class="icon mdi mdi-star"></span>
+                                          <span class="icon mdi mdi-star-half"></span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="box-comment-time">
+                                      <time datetime="2019-11-30">Nov 30, 2019</time>
+                                    </div>
+                                  </div>
+                                  <p class="box-comment-text" id="introduction">拾取人信息简介：</p>
+                                </div>
+                              </div>
+                            </div>
+                            <h4 class="text-transform-none font-weight-medium">Leave a Application</h4>
+                            <a name="goto"></a>
+
+
+                           <form action="/addApplication" method="post">
+                              <div class="row row-20 row-md-30">
+                                <div class="col-lg-8">
+                                  <div class="row row-20 row-md-30">
+                                    <div class="col-sm-6">
+                                      <div class="form-wrap">
+                                        
+                                        
+                                        <input class="form-input" id="contact-first-name-2" type="text" name="name" data-constraints="@Required" placeholder="Name"/>
+                                        
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <div class="form-wrap">
+                                        <input class="form-input" id="contact-QQ" type="text" name="QQ" data-constraints="@Required" placeholder="QQ"/>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <div class="form-wrap">
+                                        <input class="form-input" id="contact-email-2" type="email" name="email" data-constraints="@Email @Required" placeholder="E-mail"/>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <div class="form-wrap">
+                                        <input class="form-input" id="contact-phone-2" type="text" name="phone" data-constraints="@Numeric" placeholder="Phone" />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-4">
+                                  <div class="form-wrap">
+                                    <textarea class="form-input textarea-lg" id="apply-message-2" name="message" data-constraints="@Required" placeholder="Message"></textarea>
+                                  </div>
+                                </div>
+                              </div>
+                               <input type="hidden" name="Lost_ID" th:value="${lf.getLost_ID()}">
+                               <input type="hidden" name="getter_ID" th:value="${lf.getUserId()}">
+                               <input type="hidden" name="lost_ID" th:value="${lf.getLost_ID()}">
+
+                              <button class="button button-sm button-primary button-zakaria" type="submit" id="applySubmit"  > Submit</button>
+                           </form>
+                          </div>
+
+                          <div class="tab-pane fade" id="tabs-1-2">
+                            <div id="reviews">
+
+                            <div class="box-comment" th:each="review:${reviews}">
+                                <div class="unit flex-column flex-sm-row unit-spacing-md">
+                                  <div class="unit-left"><a class="box-comment-figure" href="#"><img src="imges/头像.jpg" alt="" width="119" height="119"/></a></div>
+                                  <div class="unit-body">
+                                    <div class="group-sm group-justify">
+                                      <div>
+                                        <div class="group-xs group-middle">
+                                          <h5 class="box-comment-author" th:text="${review.getUserName()}"></h5>
+                                          <div class="box-rating"><span class="icon mdi mdi-star"></span><span class="icon mdi mdi-star"></span><span class="icon mdi mdi-star"></span><span class="icon mdi mdi-star"></span><span class="icon mdi mdi-star-half"></span></div>
+                                        </div>
+                                      </div>
+                                      <div class="box-comment-time">
+                                        <time datetime="2019-11-30" th:text="${review.getTime()}">2019-11-30 15:00:35</time>
+                                      </div>
+                                    </div>
+                                    <p class="box-comment-text" th:text="${review.getInformation()}">Lorem ipsum dolor sit amet, has mutat labores nostrum ei. Duo te blandit erroribus, ut sea ipsum nonumy, mel no ignota accusamus gloriatur. Id has habeo regione, explicari hendrerit reprimique cum te.</p>
+                                  </div>
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+
+
+                              <br>
+                              <hr>
+
+                            </div>
+                              
+                         
+                            <h4 class="text-transform-none font-weight-medium">Leave a Review</h4>
+                              <form action="/addReview" method="post">
+                            
+                                <div class="col-lg-10">
+                                  <div class="form-wrap">
+                                    <textarea class="form-input textarea-lg" id="Reviews-contact-message" name="reviewComment" data-constraints="@Required" placeholder="Message"></textarea>
+                                  </div>
+                                    <div class="form-wrap">
+                                        <input type="hidden" name="Lost_ID" th:value="${lf.getLost_ID()}">
+                                    </div>
+                                </div>
+
+                              <button class="button button-sm button-primary button-zakaria" type="submit" >Publish</button>
+                              </form>
+                            </div>
+
+                          <!-- <div class="tab-pane fade" id="tabs-1-3">
+                            <div class="single-product-info">
+                              <div class="unit unit-spacing-md flex-column flex-sm-row align-items-sm-center">
+                                <div class="unit-left"><span class="icon icon-80 mdi mdi-truck-delivery"></span></div>
+                                <div class="unit-body">
+                                  <p>Lorem ipsum dolor sit amet, has mutat labores nostrum ei. Duo te blandit erroribus, ut sea ipsum nonumy, mel no ignota accusamus gloriatur. Id has habeo regione, explicari hendrerit reprimique cum teLorem ipsum dolor sit amet, has mutat labores nostrum ei. Duo te blandit erroribus, ut sea ipsum nonumy, mel no ignota accusamus gloriatur. Id has habeo regione, explicari hendrerit reprimique cum te</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div> -->
+                        </div>
+                      </div>
+
+                  </section>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+        <div th:replace="module::footer"></div>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+<div th:replace="module::toTop"></div>
+    <!-- Logout Modal-->
+<div th:replace="module::logOut"></div>
+   
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
+
+</body>
+
+
+</html>

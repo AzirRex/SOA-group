@@ -1,0 +1,77 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: log-receive
+  zipkin:
+    #监控的数据打到9411上
+    base-url: http://47.115.178.7:9411
+    sleuth:
+      sampler:
+      #采样率值介于 0 到 1 之间，1 则表示全部采集
+      probability: 1
+  datasource:
+    username: nyx
+    password: 123456
+    url: jdbc:mysql://47.115.178.7:3306/tjsoa?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  cloud:
+    stream:
+      binders: #绑定的rabbitmq的服务信息
+        defaultRabbit: #表示定义的名称，用于整合
+          type: rabbit #消息组件的类型
+          environment: #设置rabbitmq的相关的环境配置
+            spring:
+              rabbitmq:
+                host: 121.4.51.246
+                prot: 5672
+                username: nyx
+                password: 123456
+      #区别就在这input和output
+      bindings: #服务整合处理
+        input: #这个名字是一个通道名称
+          destination: studyExchange #表示要使用的Exchange名称
+          content-type: application/json #设置消息类型，本次为json
+          binder: defaultRabbit #设置要绑定的设置
+          group: LostandFoundB #设置分组 分组不同其重复消费问题可以解决
+          #同一个组两个消费者在队列中轮流接收轮流消费 而且可以持久化接收
+  ##链路追踪 记录保存在9411端口
+
+###    config: /*
+#    label: main
+#    name: config_dev
+#    uri: http://localhost:3344
+#  #MQ
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
+
+
+#mybatis:
+#  mapper-locations: classpath:mapper/*.xml
+#  type-aliases-package: com.lostandfound.springcloud.entities  #所有entity别名所在包
+
+eureka:
+  client:
+    #是否向注册中心注册自己
+    register-with-eureka: true
+    #false表示自己就是注册中心
+    fetch-registry: true
+    serviceUrl:
+      #defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/ #注意要与服务中心配置的url一致
+      defaultZone: http://47.115.178.7:8761/eureka/,http://119.23.251.29:8761/eureka/
+  instance:
+    prefer-ip-address: true #跨域访问
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    ip-address: 119.23.251.29
+
+  #rabbitmq相关配置，暴露bus刷新配置端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

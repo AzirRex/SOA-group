@@ -1,0 +1,24 @@
+server:
+  port: 9001
+
+
+
+spring:
+  application:
+    name: web-consumer
+  zipkin:
+    #监控的数据打到9411上
+    base-url: http://47.115.178.7:9411
+    sleuth:
+      sampler:
+      #采样率值介于 0 到 1 之间，1 则表示全部采集
+      probability: 1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://47.115.178.7:8761/eureka/,http://119.23.251.29:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    ip-address: 121.4.51.246

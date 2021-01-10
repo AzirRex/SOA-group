@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>失物招领</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script src="/js/form.js"></script>
+
+</head>
+
+<body id="page-top">
+
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div th:replace="module::sideBar"></div>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <div th:replace="module::topBar"></div>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                
+                <div class="container-fluid">
+                    <!-- <a href="#" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                        <td>  
+                            <button class="btn btn-primary btn-sm" data-toggle="modal"  data-target="#addUserModal">
+                                添加拾取物品
+                            </button>
+                        </td>
+                    </a>
+                    <a href="#" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                        <td>  
+                            <button class="btn btn-primary btn-sm" data-toggle="modal"  data-target="#addUserModal">
+                                添加用户
+                            </button>
+                        </td>
+                    </a> -->
+                    <!-- Page Heading --> <!-- 按钮触发模态框 --> <!-- 按钮触发模态框 -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">失物招领</h1>
+                    </div>
+                    <div class="row">
+                        <!-- New Flavors-->
+                        <div class="col-lg-12">
+
+                            <!-- Dropdown Card Example -->
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">欢迎使用TJ失物招领服务！</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">可选功能:</div>
+                                            
+                                    <a class="dropdown-item" href="#"> <span class="icon text-white-100">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                    <td>  
+                                        <button class="btn btn-primary btn-sm" data-toggle="modal"  data-target="#addUserModal">
+                                            我有拾取物品需上传！
+                                        </button>
+                                    </td>
+                                </a>
+                                <!-- TODO -->
+                                <a class="dropdown-item" href="/getDataTable"> <span class="icon text-white-100">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                    <td>  
+                                        <button class="btn btn-primary btn-sm" data-toggle="modal"  >
+                                            查看我收到的所有失物申请
+                                        </button>
+                                    </td>
+                                </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                         
+                              
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                点击想要浏览的失物图标，可浏览相应失物的信息，点击右侧省略号可选择相应功能
+                                <section class="section section-md bg-primary-2">
+                                    <div class="container">
+                                        <!-- <h2 class="text-transform-capitalize wow fadeScale">welcome</h2> -->
+                                        <div class="row row-lg row-30 row-lg-30" id="show">
+
+                                            <div class="col-sm-6 col-md-4 col-lg-3" th:each="lf:${LFList}">
+                                                <article class="product wow fadeInRight" data-wow-delay=".3s">
+                                                    <div class="product-body">
+                                                        <div class="product-figure"><img src="img/shop-1.png" alt=""
+                                                                                         width="165" height="120" /> </div>
+                                                        <h5 class="product-title"><a href="single-lost.html" th:text="${lf.getName()}"></a></h5>
+
+                                                        <div class="product-price-wrap">
+                                                            <div class="product-price" th:text="${lf.getLocation()}"></div>
+                                                        </div></div>
+                                                    <div class="product-button-wrap">
+
+                                                        <div class="product-button"><a class="button button-primary-2 button-zakaria fl-bigmug-line-shopping202"
+                                                                                       th:href="@{/lost/{lost_ID}(lost_ID=${lf.getLost_ID()})}">查看</a>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </div>
+
+                                            <!--product-->
+                                           <!--<div class="col-sm-6 col-md-4 col-lg-3">
+                                                
+                                                <article class="product wow fadeInRight">
+                                                    <div class="product-body">
+                                                        <div class="product-figure"><img src="img/shop-1.png" alt=""
+                                                                width="148" height="128" /> </div>
+                                                        <h5 class="product-title"><a href="single-product.html">Lorem Ipsum</a>
+                                                        </h5>
+                                                        <div class="product-price-wrap">
+                                                            <div class="product-price product-price-old">$30.00</div>
+                                                            <div class="product-price">$17.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <span class="product-badge product-badge-sale"></span>
+                                                    <div class="product-button-wrap">
+                                                        <div class="product-button"><a
+                                                                class="button button-gray-14 button-zakaria fl-bigmug-line-search74"
+                                                                href="single-product.html">查看</a></div>
+                                                        <div class="product-button"><a
+                                                                class="button button-primary-2 button-zakaria fl-bigmug-line-shopping202"
+                                                                href="cart-page.html">查看</a></div>
+                                                    </div>
+                                                </article>
+                                            </div>
+        
+                                            <div class="col-sm-6 col-md-4 col-lg-3">
+                                                
+                                                <article class="product wow fadeInRight" data-wow-delay=".1s">
+                                                    <div class="product-body">
+                                                        <div class="product-figure"><img src="img/shop-1.png" alt=""
+                                                                width="128" height="220" /> </div>
+                                                        <h5 class="product-title"><a href="single-product.html">Lorem Ipsum</a>
+                                                        </h5>
+                                                        <div class="product-price-wrap">
+                                                            <div class="product-price">$13.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-button-wrap">
+                                                        <div class="product-button"><a
+                                                                class="button button-gray-14 button-zakaria fl-bigmug-line-search74"
+                                                                href="single-product.html">查看</a></div>
+                                                        <div class="product-button"><a
+                                                                class="button button-primary-2 button-zakaria fl-bigmug-line-shopping202"
+                                                                href="cart-page.html">查看</a></div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4 col-lg-3">
+                                                
+                                                <article class="product wow fadeInRight" data-wow-delay=".2s">
+                                                    <div class="product-body">
+                                                        <div class="product-figure"><img src="img/shop-1.png" alt=""
+                                                                width="145" height="163" /> </div>
+                                                        <h5 class="product-title"><a href="single-product.html">Lorem Ipsum</a>
+                                                        </h5>
+                                                        <div class="product-price-wrap">
+                                                            <div class="product-price">$17.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-button-wrap">
+                                                        <div class="product-button"><a
+                                                                class="button button-gray-14 button-zakaria fl-bigmug-line-search74"
+                                                                href="single-product.html">查看</a></div>
+                                                        <div class="product-button"><a
+                                                                class="button button-primary-2 button-zakaria fl-bigmug-line-shopping202"
+                                                                href="cart-page.html">查看</a></div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4 col-lg-3">
+                                                
+                                                <article class="product wow fadeInRight" data-wow-delay=".3s">
+                                                    <div class="product-body">
+                                                        <div class="product-figure"><img src="img/shop-1.png" alt=""
+                                                                width="165" height="120" /> </div>
+                                                        <h5 class="product-title"><a href="single-product.html">Lorem Ipsum</a>
+                                                        </h5>
+                                                        <div class="product-price-wrap">
+                                                            <div class="product-price">$14.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-button-wrap">
+                                                        <div class="product-button"><a
+                                                                class="button button-gray-14 button-zakaria fl-bigmug-line-search74"
+                                                                href="single-product.html">查看</a></div>
+                                                        <div class="product-button"><a
+                                                                class="button button-primary-2 button-zakaria fl-bigmug-line-shopping202"
+                                                                href="cart-page.html">查看</a></div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4 col-lg-3">
+                                                
+                                                <article class="product wow fadeInLeft" data-wow-delay=".3s">
+                                                    <div class="product-body">
+                                                        <div class="product-figure"><img src="img/shop-1.png" alt=""
+                                                                width="117" height="131" /> </div>
+                                                        <h5 class="product-title"><a href="single-product.html">Lorem Ipsum</a>
+                                                        </h5>
+                                                        <div class="product-price-wrap">
+                                                            <div class="product-price">$11.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-button-wrap">
+                                                        <div class="product-button"><a
+                                                                class="button button-gray-14 button-zakaria fl-bigmug-line-search74"
+                                                                href="single-product.html">查看</a></div>
+                                                        <div class="product-button"><a
+                                                                class="button button-primary-2 button-zakaria fl-bigmug-line-shopping202"
+                                                                href="cart-page.html">查看</a></div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4 col-lg-3">
+                                                
+                                                <article class="product wow fadeInLeft" data-wow-delay=".2s">
+                                                    <div class="product-body">
+                                                        <div class="product-figure"><img src="img/shop-1.png" alt=""
+                                                                width="171" height="106" /> </div>
+                                                        <h5 class="product-title"><a href="single-product.html">Lorem Ipsum</a>
+                                                        </h5>
+                                                        <div class="product-price-wrap">
+                                                            <div class="product-price">$15.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-button-wrap">
+                                                        <div class="product-button"><a
+                                                                class="button button-gray-14 button-zakaria fl-bigmug-line-search74"
+                                                                href="single-product.html">查看</a></div>
+                                                        <div class="product-button"><a
+                                                                class="button button-primary-2 button-zakaria fl-bigmug-line-shopping202"
+                                                                href="cart-page.html">查看</a></div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4 col-lg-3">
+                                                
+                                                <article class="product wow fadeInLeft" data-wow-delay=".1s">
+                                                    <div class="product-body">
+                                                        <div class="product-figure"><img src="img/shop-1.png" alt=""
+                                                                width="155" height="153" /> </div>
+                                                        <h5 class="product-title"><a href="single-product.html">Lorem Ipsum</a>
+                                                        </h5>
+                                                        <div class="product-price-wrap">
+                                                            <div class="product-price">$22.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-button-wrap">
+                                                        <div class="product-button"><a
+                                                                class="button button-gray-14 button-zakaria fl-bigmug-line-search74"
+                                                                href="single-product.html">查看</a></div>
+                                                        <div class="product-button"><a
+                                                                class="button button-primary-2 button-zakaria fl-bigmug-line-shopping202"
+                                                                href="cart-page.html">查看</a></div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4 col-lg-3">
+                                                
+                                                <article class="product wow fadeInLeft">
+                                                    <div class="product-body">
+                                                        <div class="product-figure"><img src="img/shop-1.png" alt=""
+                                                                width="146" height="135" /> </div>
+                                                        <h5 class="product-title"><a href="single-product.html">Lorem Ipsum</a>
+                                                        </h5>
+                                                        <div class="product-price-wrap">
+                                                            <div class="product-price">$10.00</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-button-wrap">
+                                                        <div class="product-button"><a
+                                                                class="button button-gray-14 button-zakaria fl-bigmug-line-search74"
+                                                                href="single-product.html">查看</a></div>
+                                                        <div class="product-button"><a
+                                                                class="button button-primary-2 button-zakaria fl-bigmug-line-shopping202"
+                                                                href="cart-page.html">查看</a></div>
+                                                    </div>
+                                                </article>
+                                            </div>-->
+                                            
+                                        </div>
+                                    </div>
+                                <!-- Default Card Example --><!-- Basic Card Example --></section>
+
+                                
+                                </div>
+                            </div>
+                        
+                        <!-- <div class="col-lg-6">
+
+                            
+                            <div class="card mb-4">
+                                <div class="card-header">g
+                                    Default Card Example
+                                </div>
+                                <div class="card-body">
+                                    This card uses Bootstraps default styling with no utility classes added. Global
+                                    styles are the only things modifying the look and feel of this default card example.
+                                </div>
+                            </div>
+
+                            
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+                                </div>
+                                <div class="card-body">
+                                    The styling for this basic card example is created by using default Bootstrap
+                                    utility classes. By using utility classes, the style of the card component can be
+                                    easily modified with no need for any custom CSS!
+                                </div>
+                            </div>
+
+                        </div> -->
+  <!-- Dropdown Card Example -->   <!-- Card Header - Dropdown --> <!-- Card Body --><!-- Collapsable Card Example --> <!-- Card Content - Collapse --> <!-- Card Header - Accordion -->
+                        <!-- <div class="col-lg-6">
+
+                          
+                            <div class="card shadow mb-4">
+                             
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Dropdown Card Example</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Dropdown Header:</div>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="card-body">
+                                    Dropdown menus can be placed in the card header in order to extend the functionality
+                                    of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis
+                                    icon in the card header can be clicked on in order to toggle a dropdown menu.
+                                </div>
+                            </div>
+
+                            
+                            <div class="card shadow mb-4">
+                               
+                                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                                    role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                    <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
+                                </a>
+                               
+                                <div class="collapse show" id="collapseCardExample">
+                                    <div class="card-body">
+                                        This is a collapsable card example using Bootstraps built in collapse
+                                        functionality. <strong>Click on the card header</strong> to see the card body
+                                        collapse and expand!
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div> -->
+
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+                <div th:replace="module::footer"></div>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <div th:replace="module::toTop"></div>
+
+    <!-- Logout Modal-->
+    <div th:replace="module::logOut"></div>
+   
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+{page_str}       
+
+<!-- 模态框示例（Modal） -->
+<form method="post" action="/addLost" class="form-horizontal"   style="margin: 20px;">
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">
+                    拾取物体名称
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+
+
+                    <div class="form-group">
+                        <label for="lastname" class="col-sm-3 control-label">物品名称:</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" name="user_name" value="" id="user_name"
+                                   placeholder="物品名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="col-sm-3 control-label">拾取地点:</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" name="address" value="" id="address"
+                                   placeholder="地址">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="col-sm-3 control-label">拾取时间:</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" name="getTime" value="" id="getTime"
+                                   placeholder="时间">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="remark" class="col-sm-3 control-label">简单描述:</label>
+                        <div class="col-sm-12">
+                            <textarea  class="form-control"  name="remark" value="" id="remark"
+                                   placeholder="描述">
+
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            提交
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+</form>
+
+</html>

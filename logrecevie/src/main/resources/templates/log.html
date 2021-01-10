@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>日志中心</h2>
+<div class="container">
+    <div class="row clearfix" th:each="log:${logList}">
+        <li class="col-md-4 column">
+            <span th:text="'日志id：'+${log.log_id}"></span>
+            <span th:text="'时间：'+${log.time}"></span>
+            <span th:text="'操作类型：'+${log.type}"></span>
+            <span th:text="'操作属性：'+${log.caozuo_shuxing}"></span>
+            <span th:text="'操作表格：'+${log.caozuo_table}"></span>
+            <span th:text="'操作IP：'+${log.caozuo_ip}"></span>
+        </li>
+    </div>
+</div>
+
+</body>
+</html>
