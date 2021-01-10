@@ -1,0 +1,18 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: nyx
+eureka:
+  client:
+    service-url:
+      defaultZone: http://119.23.251.29:8761/eureka/
+  server:
+    enable-self-preservation: false
+  instance:
+    prefer-ip-address: true
+    ip-address: 47.115.178.7
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    hostname: ${spring.cloud.client.ip-address}
